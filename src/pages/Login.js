@@ -13,6 +13,7 @@ import {
 import { makeStyles } from '@material-ui/styles';
 import logo from './pokemon-logo.png';
 import { AppContext } from '../contexts/AppContext';
+import { login } from '../api/fetch';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Login() {
-  const { setIsLogged } = useContext(AppContext);
+  const { setIsLogged, setUser } = useContext(AppContext);
   const styles = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,7 +39,12 @@ export default function Login() {
   const handlePassword = ({ target: { value } }) => setPassword(value);
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsLogged(true);
+    login(email, password)
+      .then(user => {
+        setUser(user);
+        setIsLogged(true);
+      })
+      .catch(console.error);
   }
 
   return (
