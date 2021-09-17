@@ -1,5 +1,5 @@
-import { Box, CardContent, Grid, Typography } from '@material-ui/core';
-import Card from '../components/Card'; 
+import { CardContent, Grid, Typography } from '@material-ui/core';
+import Card from '../components/Card';
 import React, { useEffect, useState } from 'react';
 import { generations } from '../api/fetch';
 import Layout from '../components/Layout';
@@ -19,20 +19,18 @@ export default function Home() {
             <Grid item xs={12} sm={12} md={6} lg={3}>
               <Card>
                 <CardContent>
-                  <Box textAlign="center">
-                    <Typography component="h6">{version.name}</Typography>
-                    <Typography color="textSecondary">
-                      { version.main_region.name }
+                  <Typography variant="h5" align="center">{version.name}</Typography>
+                  <Typography color="textSecondary" variant="h6" align="center">
+                    {version.main_region.name}
+                  </Typography>
+                  <Typography align="justify">
+                    <Typography variant="h6" display="inline" align="left">Games: </Typography>
+                    <Typography variant="span" align="right" display="inline" color="textSecondary">
+                      {
+                        version.games.map(({ name }) => name).join(' ')
+                      }
                     </Typography>
-                    <Typography component="h6">Games</Typography>
-                    {
-                      version.games.map(game => (
-                        <Typography color="textSecondary">
-                          { game.name }
-                        </Typography>
-                      ))
-                    }
-                  </Box>
+                  </Typography>
                 </CardContent>
               </Card>
             </Grid>
