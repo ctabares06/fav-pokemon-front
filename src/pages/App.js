@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { AppContext } from '../contexts/AppContext';
 import Home from './Home';
 import Login from './Login';
+import { login } from '../api/fetch';
 
 const AuthRoute = (props) => {
-  const { isLogged } = useContext(AppContext);
+  const { isLogged, setIsLogged } = useContext(AppContext);
   const history = useHistory();
 
   if (!isLogged) {
@@ -17,6 +18,12 @@ const AuthRoute = (props) => {
 }
 
 function App() {
+  const { setIsLogged } = useContext(AppContext);
+
+  useEffect(() => {
+    login()
+  }, [])
+
   return (
     <>
     <CssBaseline />
