@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const initialValue = {
   isLogged: false,
@@ -14,9 +15,17 @@ const initialValue = {
 export const AppContext = createContext(initialValue);
 
 const AppProvider = ({ children }) => {
-
+  const history = useHistory();
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(initialValue.user);
+
+  useEffect(() => {
+    if (isLogged) {
+      history.push('/')
+    } else {
+      history.push('/login')
+    }
+  }, [isLogged]);
 
   const state = {
     isLogged,
