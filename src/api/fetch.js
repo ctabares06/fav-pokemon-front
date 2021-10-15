@@ -1,5 +1,5 @@
 const makeFetch = (url, params) =>
-  fetch(url, {
+  fetch("/api/"+url, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -14,7 +14,7 @@ const makeFetch = (url, params) =>
     });
 
 export const login = (email, password) =>
-  makeFetch('api/auth', {
+  makeFetch('auth', {
     method: 'POST',
     body: JSON.stringify({
       email,
@@ -23,9 +23,12 @@ export const login = (email, password) =>
   });
 
 export const checkSession = () =>
-  makeFetch('api/auth/me', {
+  makeFetch('auth/me', {
     method: 'GET'
   });
 
 export const generations = () =>
-  makeFetch('api/pokemon/generations');
+  makeFetch('pokemon/generations');
+
+export const getGeneration = (id) =>
+  makeFetch(`pokemon/generations/${id}`);
