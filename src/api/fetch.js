@@ -6,10 +6,11 @@ const makeFetch = (url, params) =>
     ...params,
   })
     .then(res => {
-      if (!res.ok) {
-        throw new Error(res.statusText);
+      if (res.ok) {
+        return res.json();
       }
-      return res.json();
+
+      throw new Error(res.statusText);
     });
 
 export const login = (email, password) =>
@@ -19,6 +20,11 @@ export const login = (email, password) =>
       email,
       password,
     })
+  });
+
+export const checkSession = () =>
+  makeFetch('api/auth/me', {
+    method: 'GET'
   });
 
 export const generations = () =>
