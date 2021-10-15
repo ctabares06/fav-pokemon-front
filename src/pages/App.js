@@ -5,6 +5,7 @@ import { AppContext } from '../contexts/AppContext';
 import { AuthRoute } from '../guards/auth';
 import Home from './Home';
 import Login from './Login';
+import Generation from './Generation';
 import { checkSession } from '../api/fetch';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
   useEffect(() => {
     checkSession()
       .then(() => setIsLogged(true))
-      .catch(console.error);
+      .catch(() => setIsLogged(false));
   }, [])
 
   return (
@@ -21,6 +22,7 @@ function App() {
     <CssBaseline />
     <Switch>
       <AuthRoute exact path="/" component={Home} />
+      <AuthRoute path="/generation/:id" component={Generation} />
       <Route path="/login" component={Login} />
     </Switch>
     </>

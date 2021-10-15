@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { CardContent, Grid, Typography } from '@material-ui/core';
 import Card from '../components/Card';
 import React, { useEffect, useState } from 'react';
@@ -17,22 +18,24 @@ export default function Home() {
         {
           versions.map(version => (
             <Grid item xs={12} sm={12} md={6} lg={3}>
-              <Card>
-                <CardContent>
-                  <Typography variant="h5" align="center">{version.name}</Typography>
-                  <Typography color="textSecondary" variant="h6" align="center">
-                    {version.main_region.name}
-                  </Typography>
-                  <Typography align="justify">
-                    <Typography variant="h6" display="inline" align="left">Games: </Typography>
-                    <Typography variant="span" align="right" display="inline" color="textSecondary">
-                      {
-                        version.games.map(({ name }) => name).join(' ')
-                      }
+              <Link to={`generation/${ version.name }`}>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" align="center">{version.name}</Typography>
+                    <Typography color="textSecondary" variant="h6" align="center">
+                      {version.main_region.name}
                     </Typography>
-                  </Typography>
-                </CardContent>
-              </Card>
+                    <Typography align="justify">
+                      <Typography variant="h6" display="inline" align="left">Games: </Typography>
+                      <Typography variant="span" align="right" display="inline" color="textSecondary">
+                        {
+                          version.games.map(({ name }) => name).join(' ')
+                        }
+                      </Typography>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             </Grid>
           ))
         }
