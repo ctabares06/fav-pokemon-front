@@ -7,15 +7,19 @@ import Home from './Home';
 import Login from './Login';
 import Generation from './Generation';
 import { checkSession } from '../api/fetch';
+import User from './User';
 
 function App() {
-  const { setIsLogged } = useContext(AppContext);
+  const { setIsLogged, setUser } = useContext(AppContext);
 
   useEffect(() => {
     checkSession()
-      .then(() => setIsLogged(true))
+      .then((user) => {
+        setIsLogged(true)
+        setUser(user)
+      })
       .catch(() => setIsLogged(false));
-  }, [])
+  }, [setIsLogged, setUser])
 
   return (
     <>
@@ -23,6 +27,7 @@ function App() {
     <Switch>
       <AuthRoute exact path="/" component={Home} />
       <AuthRoute path="/generation/:id" component={Generation} />
+      <AuthRoute path="/user/:id" component={User} />
       <Route path="/login" component={Login} />
     </Switch>
     </>

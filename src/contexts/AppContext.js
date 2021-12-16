@@ -8,6 +8,7 @@ const initialValue = {
     firstname: '',
     lastname: '',
     email: '',
+    id: null,
   },
   setUser: () => {},
 }
