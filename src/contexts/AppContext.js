@@ -3,14 +3,14 @@ import { useHistory } from 'react-router-dom';
 
 const initialValue = {
   isLogged: false,
-  setIsLogged: () => {},
+  setIsLogged: () => { },
   user: {
-    firstname: '',
+    firstName: '',
     lastname: '',
     email: '',
     id: null,
   },
-  setUser: () => {},
+  setUser: () => { },
 }
 
 export const AppContext = createContext(initialValue);
