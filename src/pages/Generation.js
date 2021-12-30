@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { 
-  Card, 
-  CardMedia, 
-  CardContent, 
+import {
+  Card,
+  CardMedia,
+  CardContent,
   Chip,
   Typography,
-  Grid, 
-  makeStyles, 
+  Grid,
+  makeStyles,
   Box
 } from '@material-ui/core';
 import { getGeneration } from '../api/fetch';
@@ -23,8 +23,8 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Generation () {
-  const classes = useStyles(); 
+export default function Generation() {
+  const classes = useStyles();
   const { id } = useParams();
   const [pokemons, setPokemons] = useState([]);
 
@@ -36,8 +36,8 @@ export default function Generation () {
 
   return (
     <Layout>
-      <Grid container alignItems="strech" spacing={3}>
-        { pokemons.map((pokemon) => {
+      <Grid container alignItems="stretch" spacing={3}>
+        {pokemons.map((pokemon) => {
           return (
             <Grid item xs={12} sm={12} md={6} lg={3}>
               <Card>
@@ -57,7 +57,7 @@ export default function Generation () {
               </Card>
             </Grid>
           )
-        }) }
+        })}
       </Grid>
     </Layout>
   )

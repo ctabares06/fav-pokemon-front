@@ -64,7 +64,7 @@ export default function Login() {
                   <Input type="password" id="email" onChange={handlePassword} value={password} aria-describedby="insert-you-email" />
                 </FormControl>
                 <FormControl margin="normal">
-                  <Button type="submit" variant="contained" color="secondary">Submit</Button>
+                  <Button type="submit" variant="contained" color="primary">Submit</Button>
                 </FormControl>
               </FormGroup>
             </form>

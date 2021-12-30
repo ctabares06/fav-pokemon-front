@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   },
   title: {
     flexGrow: 1,
-  }
+  },
 })
 
 const HeaderComponent = () => {
@@ -19,13 +19,15 @@ const HeaderComponent = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar color="secondary" position="static" variant="elevation">
+      <AppBar color="primary" position="static" variant="elevation">
         <Toolbar display="flex" justifyContent="space-between">
-          <Typography className={classes.title} component="h5">My Pokemon Favs</Typography>
-          <Button>
-            <Link to={`user/${user.id}`}>
-              User info
-            </Link>
+          <Typography className={classes.title} variant='h5'>
+            <Button color='secondary' component={Link} to="/">
+              My Pokemon Favs
+            </Button>
+          </Typography>
+          <Button color='secondary' variant="contained" component={Link} to={`/user/${user.id}`}>
+            User info
           </Button>
         </Toolbar>
       </AppBar>
