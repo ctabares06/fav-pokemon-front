@@ -1,31 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  Card,
-  CardMedia,
-  CardContent,
-  Chip,
-  Typography,
   Grid,
-  makeStyles,
-  Box
 } from '@material-ui/core';
 import { getGeneration } from '../api/fetch';
 import Layout from '../components/Layout';
-
-const useStyles = makeStyles({
-  image: {
-    height: '150px',
-    backgroundSize: 'contain',
-  },
-  chip: {
-    marginLeft: "5px",
-  }
-})
+import PokemonCard from '../components/pokemon/Card';
+import { AppContext } from '../contexts/AppContext';
 
 export default function Generation() {
-  const classes = useStyles();
   const { id } = useParams();
+  const { user: { FavoritePokemons } } = useContext(AppContext)
+  const pokemonIds = FavoritePokemons.reduce((acc, pokemon) => {
+    acc.push(pokemon.id);
+    return acc;
+  }, []);
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
@@ -37,24 +26,17 @@ export default function Generation() {
   return (
     <Layout>
       <Grid container alignItems="stretch" spacing={3}>
-        {pokemons.map((pokemon) => {
+        {pokemons.map((pokemon, index) => {
+          let isFavorite = false;
+          for (let i = 0; i < pokemonIds.length; i++) {
+            if (pokemon.id === pokemonIds[i]) {
+              isFavorite = true;
+              break;
+            }
+          }
           return (
-            <Grid item xs={12} sm={12} md={6} lg={3}>
-              <Card>
-                <CardMedia className={classes.image} image={pokemon.sprite} title={pokemon.name} />
-                <CardContent>
-                  <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography component="span">{pokemon.name}</Typography>
-                    <div>
-                      {
-                        pokemon.types.map((type) => (
-                          <Chip className={classes.chip} label={type} variant="outlined" />
-                        ))
-                      }
-                    </div>
-                  </Box>
-                </CardContent>
-              </Card>
+            <Grid key={index} item xs={12} sm={12} md={6} lg={3}>
+              <PokemonCard {...pokemon} isFavorite={isFavorite} key={index} />
             </Grid>
           )
         })}

@@ -11,7 +11,7 @@ import {
   CardMedia
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import logo from './pokemon-logo.png';
+import logo from '../static/pokemon-logo.png';
 import { AppContext } from '../contexts/AppContext';
 import { login } from '../api/fetch';
 

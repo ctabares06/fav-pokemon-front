@@ -9,6 +9,7 @@ const initialValue = {
     lastname: '',
     email: '',
     id: null,
+    FavoritePokemons: [],
   },
   setUser: () => { },
 }
