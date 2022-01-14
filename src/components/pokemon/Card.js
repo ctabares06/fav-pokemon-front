@@ -1,5 +1,6 @@
-import { Box, Card, CardContent, CardMedia, Chip, makeStyles, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, CardMedia, CardActions, Chip, makeStyles, Typography } from '@material-ui/core';
 import Star from '../general/Star';
+import CustomButton from '../general/Button';
 import React from 'react'
 
 const useStyles = makeStyles({
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
 
 const PokemonCard = ({ sprite, name, types, isFavorite = false }) => {
   const classes = useStyles();
+  const buttonText = isFavorite ? "Favorite" : 'Add to Favorite';
 
   return (
     <Card className={classes.card}>
@@ -45,6 +47,9 @@ const PokemonCard = ({ sprite, name, types, isFavorite = false }) => {
           </div>
         </Box>
       </CardContent>
+      <CardActions>
+        <CustomButton isActive={isFavorite} handleClick={() => { }} text={buttonText} />
+      </CardActions>
     </Card>
   )
 }

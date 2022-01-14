@@ -64,6 +64,10 @@ export default function Login() {
                   <Input type="password" id="email" onChange={handlePassword} value={password} aria-describedby="insert-you-email" />
                 </FormControl>
                 <FormControl margin="normal">
+                  <InputLabel htmlFor="email">otro que no sirve pa na</InputLabel>
+                  <Input type="password" id="email" onChange={handlePassword} value={password} aria-describedby="insert-you-email" />
+                </FormControl>
+                <FormControl margin="normal">
                   <Button type="submit" variant="contained" color="primary">Submit</Button>
                 </FormControl>
               </FormGroup>
