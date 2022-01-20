@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import { Grid, makeStyles, Typography } from '@material-ui/core';
 import UserInfoLine from '../components/user/UserInfoLine';
 import PokemonCard from '../components/pokemon/Card';
+import { removeFavorite } from '../api/fetch';
 
 const useStyles = makeStyles({
   pokemonGrid: {
@@ -13,8 +14,19 @@ const useStyles = makeStyles({
 })
 
 const User = () => {
-  const { user } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const styles = useStyles();
+
+  const handleRemoveFavorite = (user_id, pokemon_id) => {
+    removeFavorite(user_id, pokemon_id)
+      .then(favorites => {
+        setUser(user => ({
+          ...user, FavoritePokemons: favorites,
+        }))
+      })
+      .catch(() => null);
+  }
+
   return (
     <Layout>
       <Card>
@@ -32,7 +44,7 @@ const User = () => {
         {user.FavoritePokemons.map((pokemon, index) => {
           return (
             <Grid key={index} item xs={12} sm={12} md={6} lg={3}>
-              <PokemonCard {...pokemon} />
+              <PokemonCard {...pokemon} isFavorite={true} handleFavorite={() => handleRemoveFavorite(user.id, pokemon.id)} />
             </Grid>
           )
         })}

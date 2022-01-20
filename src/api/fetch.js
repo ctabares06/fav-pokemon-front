@@ -1,5 +1,5 @@
 const makeFetch = (url, params) =>
-  fetch("/api/"+url, {
+  fetch("/api/" + url, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -32,3 +32,17 @@ export const generations = () =>
 
 export const getGeneration = (id) =>
   makeFetch(`pokemon/generations/${id}`);
+
+export const addFavorite = (user_id, pokemon_id) =>
+  makeFetch(`users/favorite`, {
+    method: 'POST',
+    body: JSON.stringify({
+      user_id,
+      pokemon_id,
+    })
+  })
+
+export const removeFavorite = (user_id, pokemon_id) =>
+  makeFetch(`users/favorite/${user_id}/${pokemon_id}`, {
+    method: 'DELETE',
+  })
