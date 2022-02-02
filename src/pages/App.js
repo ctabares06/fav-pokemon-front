@@ -9,17 +9,18 @@ import Generation from './Generation';
 import { checkSession } from '../api/fetch';
 import User from './User';
 import theme from '../helpers/theme';
+import Loader from '../helpers/loader';
 
 function App() {
-  const { setIsLogged, setUser } = useContext(AppContext);
+  const { setIsLogged, setUser, isLoading, updateState } = useContext(AppContext);
 
   useEffect(() => {
-    checkSession()
+    updateState(checkSession()
       .then((user) => {
         setIsLogged(true)
         setUser(user)
       })
-      .catch(() => setIsLogged(false));
+      .catch(() => setIsLogged(false)))
   }, [setIsLogged, setUser])
 
   return (
@@ -31,6 +32,9 @@ function App() {
         <AuthRoute path="/user/:id" component={User} />
         <Route path="/login" component={Login} />
       </Switch>
+      {
+        isLoading && <Loader />
+      }
     </ThemeProvider>
   );
 }

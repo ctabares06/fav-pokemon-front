@@ -20,6 +20,9 @@ const useStyles = makeStyles({
     top: '5px',
     width: '25px',
   },
+  addButton: {
+    width: '100%',
+  },
 })
 
 const PokemonCard = ({ sprite, name, types, isFavorite = false, handleFavorite }) => {
@@ -48,7 +51,7 @@ const PokemonCard = ({ sprite, name, types, isFavorite = false, handleFavorite }
         </Box>
       </CardContent>
       <CardActions>
-        <CustomButton isActive={isFavorite} handleClick={handleFavorite} text={buttonText} />
+        <CustomButton className={classes.addButton} isActive={isFavorite} handleClick={handleFavorite} text={buttonText} />
       </CardActions>
     </Card>
   )

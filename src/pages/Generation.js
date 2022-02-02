@@ -11,7 +11,7 @@ import { addFavorite, removeFavorite } from '../api/fetch';
 
 export default function Generation() {
   const { id } = useParams();
-  const { user, setUser } = useContext(AppContext)
+  const { user, setUser, updateState } = useContext(AppContext)
   const pokemonIds = user.FavoritePokemons.reduce((acc, pokemon) => {
     acc.push(pokemon.id);
     return acc;
@@ -19,19 +19,19 @@ export default function Generation() {
   const [pokemons, setPokemons] = useState([]);
 
   const handleFavorite = (method, user_id, pokemon_id) => {
-    method(user_id, pokemon_id)
+    updateState(method(user_id, pokemon_id)
       .then(favorites => {
         setUser(user => ({
           ...user, FavoritePokemons: favorites,
         }))
       })
-      .catch(() => null);
+      .catch(() => null));
   }
 
   useEffect(() => {
-    getGeneration(id)
+    updateState(getGeneration(id)
       .then(setPokemons)
-      .catch(() => null);
+      .catch(() => null));
   }, [id])
 
   return (

@@ -1,15 +1,17 @@
 import { CardContent, Grid, Typography } from '@material-ui/core';
 import Card from '../components/Card';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { generations } from '../api/fetch';
 import Layout from '../components/Layout';
+import { AppContext } from '../contexts/AppContext';
 import Link from '../components/Link';
 
 export default function Home() {
   const [versions, setVersions] = useState([]);
+  const { updateState } = useContext(AppContext);
 
   useEffect(() => {
-    generations().then(setVersions);
+    updateState(generations().then(setVersions));
   }, [])
 
   return (

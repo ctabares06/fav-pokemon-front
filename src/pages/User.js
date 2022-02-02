@@ -14,17 +14,17 @@ const useStyles = makeStyles({
 })
 
 const User = () => {
-  const { user, setUser } = useContext(AppContext);
+  const { user, setUser, updateState } = useContext(AppContext);
   const styles = useStyles();
 
   const handleRemoveFavorite = (user_id, pokemon_id) => {
-    removeFavorite(user_id, pokemon_id)
+    updateState(removeFavorite(user_id, pokemon_id)
       .then(favorites => {
         setUser(user => ({
           ...user, FavoritePokemons: favorites,
         }))
       })
-      .catch(() => null);
+      .catch(() => null));
   }
 
   return (

@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Login() {
-  const { setIsLogged, setUser } = useContext(AppContext);
+  const { setIsLogged, setUser, updateState } = useContext(AppContext);
   const styles = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,12 +39,12 @@ export default function Login() {
   const handlePassword = ({ target: { value } }) => setPassword(value);
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(email, password)
+    updateState(login(email, password)
       .then(user => {
         setUser(user);
         setIsLogged(true);
       })
-      .catch(console.error);
+      .catch(console.error))
   }
 
   return (
